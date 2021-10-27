@@ -1,0 +1,5 @@
+venv
+*.swp
+.env
+__pycache__
+*.session
