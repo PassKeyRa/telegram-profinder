@@ -25,9 +25,11 @@ except:
 parser = argparse.ArgumentParser(description="Profinder")
 parser.add_argument('-n', '--names', default=None, help='File with names')
 parser.add_argument('-g', '--groups', default=None, help='File with groups')
+parser.add_argument('-d', '--dump', default=None, help='Use dump of users from chats')
 parser.add_argument('-M', '--more', action='store_true', help='More combinations (may produce a lot of useless results) [for files]')
 parser.add_argument('-s', '--sleep', type=int, default=None, help='Sleep for n seconds between each name resolution')
 parser.add_argument('-o', '--outfile', default=None, help='File to save results')
+parser.add_argument('-sd', '--save_dump', default=None, help='File to save users dump from chats')
 parser.add_argument('-v', '--verbose', action='store_true', help='Verbose mode')
 args = parser.parse_args()
 
@@ -56,7 +58,7 @@ if args.groups:
 client = TelegramClient('Profinder', api_id, api_hash)
 client.start()
 
-p = Profinder(client, config.groups)
+p = Profinder(client, config.groups, save_dump=args.save_dump, dump=args.dump)
 matches = {}
 for test in config.names.keys():
     m = p.findUser(config.names[test])

@@ -3,3 +3,5 @@ venv
 .env
 __pycache__
 *.session
+results.txt
+dump.txt
