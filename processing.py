@@ -1,14 +1,16 @@
 import asyncio
 import json
+import time
 from names_translator import Transliterator
 
 class Profinder:
-    def __init__(self, client, groups, save_dump=None, dump=None):
+    def __init__(self, client, groups, save_dump=None, dump=None, sleep=None):
         self.client = client
         self.dialogs = {}
         self.users = {}
         self.loop = asyncio.get_event_loop()
         self.groups = groups
+        self.sleep = sleep
         self.loop.run_until_complete(self.__get_dialogs())
         if not dump:
             self.loop.run_until_complete(self.__get_users())
@@ -57,6 +59,8 @@ class Profinder:
                     else:
                         link = f'[{full_name}](tg://user?id={user.id})'
                     self.users[user.id] = {'name':full_name, 'username':user.username, 'phone':user.phone, 'link':link, 'chat_ids':[d], 'chat_names':[self.dialogs[d]]}
+            if self.sleep:
+                time.sleep(self.sleep)
         print('Number of users:', len(self.users))
 
 

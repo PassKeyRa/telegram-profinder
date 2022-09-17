@@ -13,7 +13,7 @@ Place file `.env` with Telegram API_ID and API_HASH. Then configure `config.py`,
 
 `python3 profinder.py`
 
-* Use `-s` to set sleep time in seconds between each name resolution (search quieter)
+* Use `-s` to set sleep time in seconds between each chat users resolution (to fix errors, when a lot of chats are in input data and telegram blocks to many requests)
 * `-M` - more name combinations (also check just by surname)
 * `-o` - save final results to file
 * `-sd` - save dump of users from chats to the file for future scans

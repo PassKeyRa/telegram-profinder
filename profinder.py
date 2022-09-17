@@ -27,7 +27,7 @@ parser.add_argument('-n', '--names', default=None, help='File with names')
 parser.add_argument('-g', '--groups', default=None, help='File with groups')
 parser.add_argument('-d', '--dump', default=None, help='Use dump of users from chats')
 parser.add_argument('-M', '--more', action='store_true', help='More combinations (may produce a lot of useless results) [for files]')
-parser.add_argument('-s', '--sleep', type=int, default=None, help='Sleep for n seconds between each name resolution')
+parser.add_argument('-s', '--sleep', type=int, default=None, help='Sleep for n seconds between each chat users dumping')
 parser.add_argument('-o', '--outfile', default=None, help='File to save results')
 parser.add_argument('-sd', '--save_dump', default=None, help='File to save users dump from chats')
 parser.add_argument('-v', '--verbose', action='store_true', help='Verbose mode')
@@ -58,7 +58,7 @@ if args.groups:
 client = TelegramClient('Profinder', api_id, api_hash)
 client.start()
 
-p = Profinder(client, config.groups, save_dump=args.save_dump, dump=args.dump)
+p = Profinder(client, config.groups, save_dump=args.save_dump, dump=args.dump, sleep=args.sleep)
 matches = {}
 for test in config.names.keys():
     m = p.findUser(config.names[test])
@@ -67,8 +67,6 @@ for test in config.names.keys():
         print(Fore.BLUE + str(m))
 
     matches[test] = m
-    if args.sleep:
-        time.sleep(args.sleep)
 
 data = json.dumps(matches, ensure_ascii=False).encode('utf8')
 data = data.decode()
