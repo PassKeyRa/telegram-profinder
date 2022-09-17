@@ -16,6 +16,8 @@ Or you can pass files with names and/or groups to the script with corresponding 
 * Use `-s` to set sleep time in seconds between each name resolution (search quieter)
 * `-M` - more name combinations (also check just by surname)
 * `-o` - save final results to file
+* `-sd` - save dump of users from chats to the file for future scans
+* `-d` - load dump with user chats. In this case the script even doesn't need to interact with telegram
 * `-v` - verbose output. Prints each name resolution results immediately
 
 ## Files format
